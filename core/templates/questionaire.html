@@ -1,0 +1,408 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/questionnaire.css' %}" />
+    <title>Questionnaire d'Investissement</title>
+    <style>
+        .question {
+            display: none;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="confirmation-page">
+        <!-- Main Investment Objective -->
+        <div class="question active" id="question1" data-importance="40">
+            <h2>What is your primary goal when investing?</h2>
+            <label><input type="radio" name="q1" value="10" /> Capital Growth</label>
+            <label><input type="radio" name="q1" value="5" /> Current Income</label>
+            <label><input type="radio" name="q1" value="2" /> Capital
+                Preservation</label>
+        </div>
+
+        <!-- Specific Financial Goals -->
+        <div class="question" id="question2" data-importance="25">
+            <h2>What is the time horizon for your financial goals?</h2>
+            <label><input type="radio" name="q2" value="3" /> Short Term</label>
+            <label><input type="radio" name="q2" value="7" /> Medium Term</label>
+            <label><input type="radio" name="q2" value="10" /> Long Term</label>
+            <label><input type="radio" name="q2" value="5" /> No Specific Goal</label>
+        </div>
+
+        <!-- Return vs. Security -->
+        <div class="question" id="question3" data-importance="20">
+            <h2>
+                What is your priority between potential return and the security of
+                your investments?
+            </h2>
+            <label><input type="radio" name="q3" value="2" /> Preference for
+                Security</label>
+            <label><input type="radio" name="q3" value="10" /> Willingness to Take
+                Risks</label>
+            <label><input type="radio" name="q3" value="6" /> Balance</label>
+        </div>
+
+        <!-- Social/Environmental Benefit Projects -->
+        <div class="question" id="question4" data-importance="15">
+            <h2>
+                Is it important for you that your investments also have a positive
+                social or environmental impact?
+            </h2>
+            <label><input type="radio" name="q4" value="4" /> Yes</label>
+            <label><input type="radio" name="q4" value="10" /> No</label>
+            <label><input type="radio" name="q4" value="7" /> Depends on the Return
+                Difference</label>
+        </div>
+
+        <!-- Importance of Liquidity -->
+        <div class="question" id="question5" data-importance="20">
+            <h2>
+                How important is it for you to be able to quickly access your invested
+                funds?
+            </h2>
+            <label><input type="radio" name="q5" value="2" /> Very Important</label>
+            <label><input type="radio" name="q5" value="5" /> Moderately
+                Important</label>
+            <label><input type="radio" name="q5" value="10" /> Not Important</label>
+        </div>
+
+        <!-- Ethical Preferences -->
+        <div class="question" id="question6" data-importance="10">
+            <h2>
+                To what extent do your ethical beliefs influence your investment
+                decisions?
+            </h2>
+            <label><input type="radio" name="q6" value="3" /> Yes, significantly</label>
+            <label><input type="radio" name="q6" value="6" /> Yes, but moderately</label>
+            <label><input type="radio" name="q6" value="10" /> No, they do not influence
+                my decisions</label>
+        </div>
+
+        <!-- Future Financial Obligations -->
+        <div class="question" id="question7" data-importance="15">
+            <h2>
+                What are your expectations regarding future financial obligations?
+            </h2>
+            <label><input type="radio" name="q7" value="3" /> Short Term</label>
+            <label><input type="radio" name="q7" value="6" /> Medium Term</label>
+            <label><input type="radio" name="q7" value="10" /> No Anticipated
+                Obligations</label>
+        </div>
+
+        <!-- Use of Leverage -->
+        <div class="question" id="question8" data-importance="10">
+            <h2>
+                What is your perspective on the use of leverage in your investments?
+            </h2>
+            <label><input type="radio" name="q8" value="10" /> Positive</label>
+            <label><input type="radio" name="q8" value="6" /> Neutral</label>
+            <label><input type="radio" name="q8" value="2" /> Negative</label>
+        </div>
+
+        <!-- Reaction to a Market Downturn -->
+        <div class="question" id="question9" data-importance="15">
+            <h2>How do you react to a significant market downturn?</h2>
+            <label><input type="radio" name="q9" value="3" /> Withdraw Funds
+                Immediately</label>
+            <label><input type="radio" name="q9" value="10" /> Wait Patiently for the
+                Value to Rise</label>
+            <label><input type="radio" name="q9" value="6" /> Depends on the
+                Circumstances</label>
+        </div>
+
+        <!-- Other Sources of Funds -->
+        <div class="question" id="question10" data-importance="10">
+            <h2>Do you have other sources of funds besides your investments?</h2>
+            <label><input type="radio" name="q10" value="10" /> Yes, I have other
+                sources</label>
+            <label><input type="radio" name="q10" value="5" /> A few, but limited</label>
+            <label><input type="radio" name="q10" value="2" /> No, I do not have
+                any</label>
+        </div>
+
+        <!-- Reaction to a 10% Loss in One Month -->
+        <div class="question" id="question11" data-importance="30">
+            <h2>
+                How would you react if your investments lost 10% of their value in one
+                month?
+            </h2>
+            <label><input type="radio" name="q11" value="2" /> Sell to Limit
+                Losses</label>
+            <label><input type="radio" name="q11" value="5" /> Stay Invested Waiting for
+                a Recovery</label>
+            <label><input type="radio" name="q11" value="10" /> See It as a Buying
+                Opportunity</label>
+        </div>
+
+        <!-- Reaction to Underperforming Investment -->
+        <div class="question" id="question12" data-importance="20">
+            <h2>
+                How do you handle an investment that is not performing as expected?
+            </h2>
+            <label><input type="radio" name="q12" value="2" /> Sell to Avoid Further
+                Losses</label>
+            <label><input type="radio" name="q12" value="5" /> Hold Hoping for
+                Improvement</label>
+            <label><input type="radio" name="q12" value="10" /> Buy More at a Lower
+                Price</label>
+        </div>
+
+        <!-- Timeframe for Underperforming Investment -->
+        <div class="question" id="question13" data-importance="10">
+            <h2>
+                How long are you willing to wait before reevaluating an
+                underperforming investment?
+            </h2>
+            <label><input type="radio" name="q13" value="2" /> Short Term</label>
+            <label><input type="radio" name="q13" value="5" /> Medium Term</label>
+            <label><input type="radio" name="q13" value="8" /> Long Term</label>
+        </div>
+
+        <!-- Experience with Losses -->
+        <div class="question" id="question14" data-importance="15">
+            <h2>How have you reacted in the past to losses in your investments?</h2>
+            <label><input type="radio" name="q14" value="2" /> Sold Quickly to Limit
+                Losses</label>
+            <label><input type="radio" name="q14" value="10" /> Held or Increased
+                Position</label>
+            <label><input type="radio" name="q14" value="5" /> Never Encountered
+                Significant Losses</label>
+        </div>
+
+        <!-- Reaction to Exceptional Gains -->
+        <div class="question" id="question15" data-importance="10">
+            <h2>What do you do when your investments make exceptional gains?</h2>
+            <label><input type="radio" name="q15" value="3" /> Take Profits
+                Immediately</label>
+            <label><input type="radio" name="q15" value="6" /> Let Investments Grow
+                Further</label>
+            <label><input type="radio" name="q15" value="8" /> Invest More in the Same
+                Opportunity</label>
+        </div>
+
+        <!-- Investment Knowledge -->
+        <div class="question" id="question16" data-importance="10">
+            <h2>How would you rate your investment knowledge?</h2>
+            <label><input type="radio" name="q16" value="3" /> Basic</label>
+            <label><input type="radio" name="q16" value="6" /> Intermediate</label>
+            <label><input type="radio" name="q16" value="8" /> Advanced</label>
+        </div>
+
+        <!-- Reaction to Negative Financial News -->
+        <div class="question" id="question17" data-importance="15">
+            <h2>How do you react to unfavorable financial news?</h2>
+            <label><input type="radio" name="q17" value="2" /> Anxious and Potentially
+                Inclined to Sell</label>
+            <label><input type="radio" name="q17" value="6" /> Concerned but Rational in
+                Your Decisions</label>
+            <label><input type="radio" name="q17" value="10" /> Calm and Unswayed by
+                Short-Term Fluctuations</label>
+        </div>
+
+        <!-- Investment Choice -->
+        <div class="question" id="question18" data-importance="20">
+            <h2>What is your inclination regarding investment choices?</h2>
+            <label><input type="radio" name="q18" value="2" /> Preference for
+                Stable/Modest Investments</label>
+            <label><input type="radio" name="q18" value="6" /> Diversification to
+                Balance Risk and Return</label>
+            <label><input type="radio" name="q18" value="10" /> Ready to Choose
+                High/Volatile Options for Higher Potential Returns</label>
+        </div>
+
+        <!-- Annual Loss Tolerance -->
+        <div class="question" id="question19" data-importance="15">
+            <h2>What level of annual loss are you willing to tolerate?</h2>
+            <label><input type="radio" name="q19" value="2" /> 1-3%</label>
+            <label><input type="radio" name="q19" value="6" /> 4-6%</label>
+            <label><input type="radio" name="q19" value="9" /> More than 7%</label>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn" onclick="previousQuestion()" id="prevBtn">
+                Previous
+            </button>
+            <button class="btn" onclick="nextQuestion()" id="nextBtn">next</button>
+        </div>
+    </div>
+    <footer>
+        <p>© 2023 LeBergerCapital. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 19;
+        let totalscore = 0;
+
+        function isAnswerSelected(questionNumber) {
+            return !!document.querySelector(
+                `input[name="q${questionNumber}"]:checked`
+            );
+        }
+
+        function updateButtons() {
+            document.getElementById("prevBtn").disabled = currentQuestion === 1;
+            document.getElementById("nextBtn").textContent =
+                currentQuestion === totalQuestions ? "Voir mon profil" : "Suivant";
+        }
+
+        function nextQuestion() {
+            if (!isAnswerSelected(currentQuestion)) {
+                alert("Veuillez sélectionner une réponse avant de continuer.");
+                return;
+            }
+
+            document
+                .getElementById("question" + currentQuestion)
+                .classList.remove("active");
+            currentQuestion++;
+            if (currentQuestion <= totalQuestions) {
+                document
+                    .getElementById("question" + currentQuestion)
+                    .classList.add("active");
+            }
+            updateButtons();
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 1) {
+                document
+                    .getElementById("question" + currentQuestion)
+                    .classList.remove("active");
+                currentQuestion--;
+                document
+                    .getElementById("question" + currentQuestion)
+                    .classList.add("active");
+                updateButtons();
+            }
+        }
+
+        function submitAnswers() {
+            let totalScore = 0;
+            let totalImportance = 0;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                let questionElement = document.getElementById(`question${i}`);
+                let questionValue = parseInt(
+                    document.querySelector(`input[name="q${i}"]:checked`).value
+                );
+                let importance = parseFloat(questionElement.dataset.importance);
+                totalScore += questionValue * (importance / 100);
+                totalImportance += importance;
+            }
+
+            let adjustedScore = totalScore / (totalImportance / 100);
+
+            sessionStorage.setItem("totalScore", adjustedScore);
+            let profile = categorizeInvestor(adjustedScore);
+            sessionStorage.setItem("investorProfile", profile);
+
+
+             // AJAX ile Django'ya POST isteği gönder
+            fetch("{% url 'survey' %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken"), // CSRF token
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ total_score: totalScore, profile: profile }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // İşlem başarılıysa, kullanıcıyı yönlendir
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        //     redirectBasedOnProfile(profile);
+        // }
+
+        function categorizeInvestor(score) {
+            if (score >= 1 && score <= 3) {
+                return "Profil Conservateur";
+            } else if (score >= 4 && score <= 7) {
+                return "Profil Modéré";
+            } else if (score >= 7 && score <= 10) {
+                return "Profil Agressif";
+            }
+            return "Non défini";
+        }
+
+        function nextQuestion() {
+            if (!isAnswerSelected(currentQuestion)) {
+                alert("Veuillez sélectionner une réponse avant de continuer.");
+                return;
+            }
+
+            if (currentQuestion < totalQuestions) {
+                document
+                    .getElementById("question" + currentQuestion)
+                    .classList.remove("active");
+                currentQuestion++;
+                document
+                    .getElementById("question" + currentQuestion)
+                    .classList.add("active");
+                updateButtons();
+            } else {
+                submitAnswers();
+            }
+        }
+
+        function initializeQuestions() {
+            for (let i = 2; i <= totalQuestions; i++) {
+                document.getElementById("question" + i).classList.remove("active");
+            }
+        }
+
+        function redirectBasedOnProfile(profile) {
+            sessionStorage.setItem("profileToRedirect", profile);
+            window.location.href = "result.html";
+        }
+
+        function getCookie(name) {
+            // Django'da CSRF token'ını almak için yardımcı fonksiyon
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            updateButtons();
+            initializeQuestions();
+        });
+    </script>
+</body>
+
+</html>
+
+{% endblock %}

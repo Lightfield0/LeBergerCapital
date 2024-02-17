@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-lg mx-auto">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="p-8">
+                <h2 class="text-2xl font-semibold text-gray-800">Hesap Bilgileri</h2>
+                <div class="mt-4">
+                    <div class="text-sm font-semibold text-gray-600">Kullanıcı Adı</div>
+                    <div class="text-lg text-gray-800">{{ request.user.username }}</div>
+                </div>
+                <div class="mt-4">
+                    <div class="text-sm font-semibold text-gray-600">Email</div>
+                    <div class="text-lg text-gray-800">{{ request.user.email }}</div>
+                </div>
+                <div class="mt-4">
+                    <a href="{% url 'logout' %}" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors duration-200">Çıkış Yap</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

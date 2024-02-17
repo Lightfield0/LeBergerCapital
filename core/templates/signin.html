@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" class="vk">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In |</title>
+  <link rel="icon" href="favicon.ico" />
+  <link href="{% static 'css/home-page.css' %}" rel="stylesheet" />
+</head>
+
+<body x-data="
+      {
+        scrolledFromTop: false
+      }
+    " x-init="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false"
+  @scroll.window="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false" class="kf fl">
+  <section class="e ca ci di">
+    <div class="a">
+      <div class="ja qb _d">
+        <div class="jc ng">
+          <div class="wow fadeInUp la cd pe re gf kf mg yk gl vm" data-wow-delay="0s">
+            <h3 class="va fi mi pi yi vl gn">Sign in to your account</h3>
+            <p class="lb fi ii qi _i">Login to your account .</p>
+
+            <div class="xa qb be de">
+              <span class="sb ic jc od pf bg nm"></span>
+
+              <span class="sb ic jc od pf bg nm"></span>
+            </div>
+            <form method="post" action="{% url 'signin' %}">
+                {% csrf_token %}
+                {% if error_message %}
+                    <p style="color: red;">{{ error_message }}</p>
+                {% endif %}
+                <div class="xa">
+                    <label for="email" class="va ob hi qi aj vl">
+                        Your Email
+                    </label>
+                    <input type="email" name="email" placeholder="Enter your Email" class="br cr jc oe re af if zg sg ii _i ej lj pk rk el ql" />
+                </div>
+                <div class="xa">
+                    <label for="password" class="va ob hi qi aj vl">
+                        Your Password
+                    </label>
+                    <input type="password" name="password" placeholder="Enter your Password" class="br cr jc oe re af if zg sg ii _i ej lj pk rk el ql" />
+                </div>
+                <div class="ta">
+                    <button type="submit" class="zq qb jc be de oe of rg jh ii qi zi rj sj tj jk">Sign in</button>
+                </div>
+            </form>
+            <p class="fi ii qi xi ul">Don't you have an account? <a href="{% url 'signup' %}" class="bj mk">Sign up</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d f l ea yb jc gj" style="
+          background-image: linear-gradient(
+            180deg,
+            #3e7dff 0%,
+            rgba(62, 125, 255, 0) 100%
+          );
+        "></div>
+  </section>
+</body>
+
+</html>

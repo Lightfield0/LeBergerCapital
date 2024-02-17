@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultat du questionnaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="confirmation-page">
+        <h2>Merci pour vos réponses, {{ prenom }} {{ nom }}!</h2>
+        <p>Votre score total est : <span>{{ score }}</span></p>
+        <p>Votre profil d'investisseur est : <span>{{ profile }}</span></p>
+        <button id="nextStep" onclick="window.location.href='/'">Passer à l'étape suivante</button>
+    </div>
+    <footer>
+        <p>© 2023 LeBergerCapital. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
+
+{% endblock %}
