@@ -9,6 +9,7 @@ import json
 def survey_result_view(request):
     if request.method == "POST":
         data = json.loads(request.body)
+        print("Gelen veri:", data)
         total_score = data.get('total_score')
         profile = data.get('profile')
 
@@ -18,9 +19,12 @@ def survey_result_view(request):
             defaults={'total_score': total_score, 'profile': profile},
         )
 
-        return redirect('survey_result')
-        return JsonResponse({"success": "Anket sonuçları kaydedildi."})
-    return JsonResponse({"error": "Geçersiz istek"}, status=400)
+        # Doğrudan URL'ye yönlendirme yapılıyor
+        # return redirect('survey_result')
+        return JsonResponse({"succes": "Basarili"}, status=200)
+
+    else:
+        return JsonResponse({"error": "Geçersiz istek"}, status=400)
 
 @login_required
 def survey_result(request):

@@ -468,13 +468,13 @@ button, a {
   margin: 0 -8px;
   overflow-y: auto;
 }
-.project-boxes.jsGridView {
+/* .project-boxes.jsGridView {
   display: flex;
   flex-wrap: wrap;
-}
-.project-boxes.jsGridView .project-box-wrapper {
+} */
+/* .project-boxes.jsGridView .project-box-wrapper {
   width: 33.3%;
-}
+} */
 .project-boxes.jsListView .project-box {
   display: flex;
   border-radius: 10px;

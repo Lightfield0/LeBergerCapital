@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .forms import CustomUserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from .models import Project, News
 from question.models import SurveyResult
@@ -28,6 +29,20 @@ def home(request):
     else:
         return render(request, 'home.html',  {'show_navbar': True})
 
+@login_required
+def survey_result(request):
+    # Kullanıcının anket sonucunu al
+    survey_result = get_object_or_404(SurveyResult, user=request.user)
+    # Kullanıcıya özel mesaj ve anket sonuçları ile response döndür
+    context = {
+        'prenom': request.user.first_name,
+        'nom': request.user.last_name,
+        'score': survey_result.total_score,
+        'profile': survey_result.profile,
+    }
+    return render(request, 'result.html', context)
+
+
 
 def sign_up(request):
     if request.method == 'POST':
@@ -44,7 +59,8 @@ def sign_up(request):
         user.set_password(password)
         user.save()
 
-        login(request, user)
+        # login(request, user)
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         return redirect('home')
     return render(request, 'signup.html')
 
@@ -54,7 +70,7 @@ def sign_in(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
-        user = authenticate(request, username=email, password=password)
+        user = authenticate(request, username=email, password=password, backend='django.contrib.auth.backends.ModelBackend')
         if user is not None:
             login(request, user)
             return redirect('home')
@@ -144,13 +160,22 @@ def dashboard_view(request):
     analyzer.fetch_and_score_stocks()
     results = analyzer.results
 
+    sector_colors = {
+        "Technology": "bg-gray-500",
+        "Consumer Products": "bg-blue-500",
+        "Industrial": "bg-yellow-500"
+    }
+
     # Categorize results by sector
     for ticker, data in results.items():
         sector = ticker_sectors.get(ticker, "Unknown")
         stock_data = {
+            "AllData": data["Data"]['AllData'],
+            "company_name": ' '.join(data["Data"]['Name'].split()[:2]),
             "ticker_name": ticker,
             "price": round(data["Data"]['Stock Price'], 2),
-            "change": round(data["Data"]["Percentage Change for the Day"], 2)
+            "change": round(data["Data"]["Percentage Change for the Day"], 2),
+            "color": sector_colors.get(sector, "bg-gray-500")
         }
         sector_results[sector].append(stock_data)
 
@@ -164,7 +189,7 @@ def dashboard_view(request):
 def news_detail(request, slug):
     # Fetch the news article by slug or return 404
     news = get_object_or_404(News, slug=slug)
-     # Görüntülenme sayısını artır
+    # Görüntülenme sayısını artır
     news.views += 1
     news.save(update_fields=['views'])
 

@@ -29,6 +29,8 @@ class StockAnalyzer:
 
             info = stock.info
             stock_data = {
+                "AllData": info,
+                "Name": info.get('shortName'),
                 "Stock Price": current_price,
                 "Dividends": info.get("dividendYield", 0) * 100 if info.get("dividendYield") is not None else 0,
                 "P/E Ratio": info.get("trailingPE", 0),

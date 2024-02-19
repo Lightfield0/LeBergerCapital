@@ -331,6 +331,7 @@
             .then(data => {
                 console.log(data);
                 // İşlem başarılıysa, kullanıcıyı yönlendir
+                window.location.href = "{% url 'survey_result' %}"; // survey_result
             })
             .catch(error => console.error('Error:', error));
         }
