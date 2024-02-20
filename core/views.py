@@ -155,6 +155,7 @@ def dashboard_view(request):
         "Profit Margin": 0.10,          
         "Sector Beta": 0.15              
     }
+
     tickers_example = list(ticker_sectors.keys())
     analyzer = StockAnalyzer(tickers_example, aggressive_weights)
     analyzer.fetch_and_score_stocks()

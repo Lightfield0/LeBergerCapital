@@ -28,8 +28,115 @@ class StockAnalyzer:
                 return {}  # Return empty if no historical data
 
             info = stock.info
+            sozluk = {
+                "Summary": {
+                    "Previous Close": info['previousClose'],
+                    "Open":info['open'],
+                    "Bid":info['bidSize'],
+                    "Ask":info['askSize'],
+                    "Day's Range":f"{info['dayLow']} - {info['dayHigh']}",
+                    "52 Week Range":f"{info['fiftyTwoWeekLow']} - {info['fiftyTwoWeekHigh']}",
+                    "Volume":info['volume'],
+                    "Avg. Volume":info['averageVolume'],
+                    "Market Cap":info['marketCap'],
+                    "Beta (5Y Monthly)":info['beta'],
+                    "PE Ratio (TTM)":info['trailingPE'],
+                    "EPS (TTM)":info['trailingEps'],
+                    "Earnings Date":info['timeZoneFullName'],#şüpheli
+                    "Forward Dividend & Yield":f"{info['dividendRate']} - {info['dividendYield']}",
+                    "Ex-Dividend Date":info['exDividendDate'],
+                    "1y Target Est":info['targetMeanPrice'],
+                    
+                },
+                "Statistics": {
+                    "Valuation Measures" : {
+                        "Market Cap (intraday)":info['marketCap'],
+                        "Enterprise Value":info['enterpriseValue'],
+                        "Trailing P/E":info['trailingPE'],
+                        "Forward P/E":info['forwardPE'],
+                        "PEG Ratio (5 yr expected)":info['pegRatio'],
+                        "Price/Sales (ttm)":info['priceToSalesTrailing12Months'],
+                        "Price/Book (mrq)":info['priceToBook'],
+                        "Enterprise Value/Revenue":info['enterpriseToRevenue'],
+                        "Enterprise Value/EBITDA":info['enterpriseToEbitda']
+                    },
+                    "Financial Highlights":{
+                        "Fiscal Year":{
+                            "Fiscal Year Ends":f"{info['lastFiscalYearEnd']} - {info['nextFiscalYearEnd']}",
+                            "Most Recent Quarter (mrq)":info['mostRecentQuarter'],
+                        },
+                        "Profitability":{
+                            "Profit Margin":info['profitMargins'],
+                            "Operating Margin (ttm)":info['operatingMargins']
+                        },
+                        "Management Effectiveness":{
+                            "Return on Assets (ttm)":info['returnOnAssets'],
+                            "Return on Equity (ttm)":info['returnOnEquity']
+                        },
+                        "Income Statement":{
+                            "Revenue (ttm)":info['totalRevenue'],
+                            "Revenue Per Share (ttm)":info['revenuePerShare'],
+                            "Quarterly Revenue Growth (yoy)":info['totalRevenue'],
+                            # "Gross Profit (ttm)":info[''],
+                            "EBITDA":info['ebitda'],
+                            "Net Income Avi to Common (ttm)":info['netIncomeToCommon'],
+                            "Diluted EPS (ttm)":info['trailingEps'],
+                            "Quarterly Earnings Growth (yoy)":info['earningsQuarterlyGrowth']
+                        },
+                        "Balance Sheet":{
+                            "Total Cash (mrq)":info['totalCash'],
+                            "Total Cash Per Share (mrq)":info['totalCashPerShare'],
+                            "Total Debt (mrq)":info['totalDebt'],
+                            "Total Debt/Equity (mrq)":info['debtToEquity'],
+                            "Current Ratio (mrq)":info['currentRatio'],
+                            "Book Value Per Share (mrq)":info['bookValue']
+                        },
+                        "Cash Flow Statement":{
+                            "Operating Cash Flow (ttm)":info['operatingCashflow'],
+                            "Levered Free Cash Flow (ttm)":info['freeCashflow'],
+                        },
+                    "Trading Information":{
+                        "Stock Price History":{
+                            "Beta (5Y Monthly)":info['beta'],
+                            "52-Week Change 3":info['52WeekChange'],
+                            "S&P500 52-Week Change 3":info['SandP52WeekChange'],
+                            "52 Week High 3":info['fiftyTwoWeekHigh'],
+                            "52 Week Low 3":info['fiftyTwoWeekLow'],
+                            "50-Day Moving Average 3":info['fiftyDayAverage'],
+                            "200-Day Moving Average 3":info['twoHundredDayAverage'],
+                        },
+                        "Share Statistics":{
+                            "Avg Vol (3 month) 3":info['averageVolume'],
+                            "Avg Vol (10 day) 3":info['regularMarketVolume'],
+                            "Shares Outstanding 5":info['sharesOutstanding'],
+                            "Implied Shares Outstanding 6":info['impliedSharesOutstanding'],
+                            "Float 8":info['floatShares'],
+                            "% Held by Insiders 1":info['heldPercentInsiders'],
+                            "% Held by Institutions 1":info['heldPercentInstitutions'],
+                            "Shares Short (Jan 31, 2024) 4":info['sharesShort'],
+                            "Short Ratio (Jan 31, 2024) 4":info['shortRatio'],
+                            "Short % of Float (Jan 31, 2024) 4":info['shortPercentOfFloat'],
+                            "Short % of Shares Outstanding (Jan 31, 2024) 4":info['sharesPercentSharesOut'],
+                            "Shares Short (prior month Dec 29, 2023) 4":info['sharesShortPriorMonth']
+                        },
+                        "Dividends & Splits":{
+                            "Forward Annual Dividend Rate 4":info['dividendRate'],
+                            "Forward Annual Dividend Yield 4":info['dividendYield'],
+                            "Trailing Annual Dividend Rate 3":info['trailingAnnualDividendRate'],
+                            "Trailing Annual Dividend Yield 3":info['trailingAnnualDividendYield'],
+                            "5 Year Average Dividend Yield 4":info['fiveYearAvgDividendYield'],
+                            "Payout Ratio 4":info['payoutRatio'],
+                            "Dividend Date 3":info['lastDividendDate'],#şüpheli
+                            "Ex-Dividend Date 4":info['exDividendDate'],
+                            "Last Split Factor 2":info['lastSplitFactor'],
+                            "Last Split Date 3":info['lastSplitDate']
+                        }
+                    }
+                    }
+                }
+            }
             stock_data = {
-                "AllData": info,
+                "AllData": sozluk,
                 "Name": info.get('shortName'),
                 "Stock Price": current_price,
                 "Dividends": info.get("dividendYield", 0) * 100 if info.get("dividendYield") is not None else 0,
