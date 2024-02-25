@@ -156,8 +156,8 @@ def dashboard_view(request):
         analyzer =ConservativeStockAnalyzer(tickers_example)
     if profile == 'Moderate':
         analyzer = ModerateStockAnalyzer(tickers_example)
-    else:
-        return redirect('questionaire')
+    # else:
+    #     return redirect('questionaire')
 
     analyzer.fetch_and_score_stocks()
     results = analyzer.results

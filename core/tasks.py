@@ -1,9 +1,7 @@
-from celery import shared_task
-from django.db import transaction
-from .models import StockData
-from .stockAnalyzer import AggressiveStockAnalyzer, ConservativeStockAnalyzer
+from django.db import IntegrityError
 import yfinance as yf
-
+from .models import StockData
+from celery import shared_task
 
 @shared_task
 def fetch_and_save_stock_data():
@@ -23,21 +21,27 @@ def fetch_and_save_stock_data():
         stock = yf.Ticker(ticker)
         hist = stock.history(period="1d", interval="1m")
 
-        # Fetch additional info
-        info = stock.info
-
         if not hist.empty:
             current_price = hist['Close'].iloc[-1]
             open_price = hist['Open'].iloc[0]
             percentage_change = ((current_price - open_price) / open_price) * 100
 
-            # Create and save the stock data object
-            StockData.objects.create(
+            # Fetch additional info
+            info = stock.info
+
+            # Update or create the stock data object
+            stock_data, created = StockData.objects.update_or_create(
                 ticker=ticker,
-                # sector=sector,
-                current_price=current_price,
-                open_price=open_price,
-                percentage_change=percentage_change,
-                info=info,  # Directly assign if using JSONField
-                # info=json.dumps(info) if using TextField
+                defaults={
+                    'sector': sector,
+                    'current_price': current_price,
+                    'open_price': open_price,
+                    'percentage_change': percentage_change,
+                    'info': info,  # Directly assign if using JSONField
+                    # 'info': json.dumps(info) if using TextField
+                }
             )
+            if created:
+                print(f"Created new record for {ticker}")
+            else:
+                print(f"Updated record for {ticker}")

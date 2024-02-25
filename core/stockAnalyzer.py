@@ -423,7 +423,7 @@ class ModerateStockAnalyzer:
         for ticker in self.tickers:
             stock_data = self.get_stock_data(ticker)
             if stock_data:  
-                normalized_data = self.normalize_data_conservative(stock_data)  
+                normalized_data = self.normalize_data_moderate(stock_data)  
                 score = self.calculate_score(normalized_data)
                 self.results[ticker] = {"Score": score, "Data": stock_data}
         self.sort_results()
