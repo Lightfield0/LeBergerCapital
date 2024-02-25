@@ -47,7 +47,7 @@ class News(models.Model):
 
 class StockData(models.Model):
     ticker = models.CharField(max_length=10)
-    sector = models.CharField(max_length=50)
+    # sector = models.CharField(max_length=50)
     current_price = models.FloatField()
     open_price = models.FloatField()
     percentage_change = models.FloatField()

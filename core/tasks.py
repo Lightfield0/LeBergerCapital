@@ -34,7 +34,7 @@ def fetch_and_save_stock_data():
             # Create and save the stock data object
             StockData.objects.create(
                 ticker=ticker,
-                sector=sector,
+                # sector=sector,
                 current_price=current_price,
                 open_price=open_price,
                 percentage_change=percentage_change,
