@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from .models import Project, News
 from question.models import SurveyResult
-from .stockAnalyzer import AggressiveStockAnalyzer, ConservativeStockAnalyzer
+from .stockAnalyzer import AggressiveStockAnalyzer, ConservativeStockAnalyzer, ModerateStockAnalyzer
 # Create your views here.
 
 
@@ -127,8 +127,11 @@ def dashboard_view(request):
     # Assuming Project and News models exist as shown
     projects = Project.objects.all()
     news_articles = News.objects.all().order_by('-created_at')[:5]
-
-    profile = get_object_or_404(SurveyResult, user=request.user).profile
+    
+    try:
+        profile = get_object_or_404(SurveyResult, user=request.user).profile
+    except SurveyResult.DoesNotExist:
+        return redirect('questionaire')
 
     # Sector Results initialized
     sector_results = {"Technology": [], "Consumer Products": [], "Industrial": []}
@@ -151,6 +154,11 @@ def dashboard_view(request):
         analyzer = AggressiveStockAnalyzer(tickers_example)
     elif profile == 'Conservative':
         analyzer =ConservativeStockAnalyzer(tickers_example)
+    if profile == 'Moderate':
+        analyzer = ModerateStockAnalyzer(tickers_example)
+    else:
+        return redirect('questionaire')
+
     analyzer.fetch_and_score_stocks()
     results = analyzer.results
 
