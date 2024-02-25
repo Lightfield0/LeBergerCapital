@@ -341,13 +341,13 @@
 
         function categorizeInvestor(score) {
             if (score >= 1 && score <= 3) {
-                return "Profil Conservateur";
+                return "Conservative";
             } else if (score >= 4 && score <= 7) {
-                return "Profil Modéré";
+                return "Moderate";
             } else if (score >= 7 && score <= 10) {
-                return "Profil Agressif";
+                return "Aggressive";
             }
-            return "Non défini";
+            return "Undefined";
         }
 
         function nextQuestion() {

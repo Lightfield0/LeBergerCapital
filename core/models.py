@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
+from django.core.serializers.json import DjangoJSONEncoder
+import json
+
 
 class User(models.Model):
     name = models.CharField(max_length=100)
@@ -40,3 +43,13 @@ class News(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super(News, self).save(*args, **kwargs)
+
+
+class StockData(models.Model):
+    ticker = models.CharField(max_length=10)
+    sector = models.CharField(max_length=50)
+    current_price = models.FloatField()
+    open_price = models.FloatField()
+    percentage_change = models.FloatField()
+    info = models.JSONField(null=True, blank=True)  # For Django 3.1 and newer
+    date_fetched = models.DateTimeField(auto_now_add=True)

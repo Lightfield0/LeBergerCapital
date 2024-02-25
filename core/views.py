@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from .models import Project, News
 from question.models import SurveyResult
-from .stock import StockAnalyzer
+from .stockAnalyzer import AggressiveStockAnalyzer, ConservativeStockAnalyzer
 # Create your views here.
 
 
@@ -128,6 +128,8 @@ def dashboard_view(request):
     projects = Project.objects.all()
     news_articles = News.objects.all().order_by('-created_at')[:5]
 
+    profile = get_object_or_404(SurveyResult, user=request.user).profile
+
     # Sector Results initialized
     sector_results = {"Technology": [], "Consumer Products": [], "Industrial": []}
 
@@ -144,20 +146,11 @@ def dashboard_view(request):
         "GE": "Industrial"
     }
 
-    # Define weights and tickers for analysis
-    aggressive_weights = {
-        "Stock Price": 0.05,  
-        "Dividends": 0.05,      
-        "P/E Ratio": 0.10,  
-        "Transaction Volume": 0.05,     
-        "P/B Ratio": 0.20,  
-        "Revenue Growth": 0.30,      
-        "Profit Margin": 0.10,          
-        "Sector Beta": 0.15              
-    }
-
     tickers_example = list(ticker_sectors.keys())
-    analyzer = StockAnalyzer(tickers_example, aggressive_weights)
+    if profile == 'Aggressive':
+        analyzer = AggressiveStockAnalyzer(tickers_example)
+    elif profile == 'Conservative':
+        analyzer =ConservativeStockAnalyzer(tickers_example)
     analyzer.fetch_and_score_stocks()
     results = analyzer.results
 

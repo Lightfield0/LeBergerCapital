@@ -18,7 +18,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # projenizin_ana_dizini/settings.py
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Kullandığınız broker'a göre değişebilir
+CELERY_BROKER_URL = 'redis://localhost:6379'  # Kullandığınız broker'a göre değişebilir
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_ALWAYS_EAGER = True
+# CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+CELERY_RESULT_EXTENDED = True
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 
@@ -46,6 +53,7 @@ INSTALLED_APPS = [
     'core',
     'question',
     'ckeditor',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
