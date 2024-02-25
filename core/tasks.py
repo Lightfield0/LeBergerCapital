@@ -26,6 +26,7 @@ def fetch_and_save_stock_data():
             open_price = hist['Open'].iloc[0]
             percentage_change = ((current_price - open_price) / open_price) * 100
 
+
             # Fetch additional info
             info = stock.info
 
