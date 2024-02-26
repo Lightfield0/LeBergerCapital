@@ -148,7 +148,7 @@ class AggressiveStockAnalyzer:
 
             stock_data = {
                 "AllData": sozluk,
-                "Name": info.get('shortName'),
+                "Name": 'Airbus' if info.get('shortName') == 'AAR Corp.' else info.get('shortName'),
                 "Stock Price": current_price,
                 "Dividends": info.get("dividendYield", 0) * 100 if info.get("dividendYield") is not None else 0,
                 "P/E Ratio": info.get("trailingPE", 0),
@@ -349,7 +349,7 @@ class ConservativeStockAnalyzer:
 
             stock_data = {
                 "AllData": sozluk,
-                "Name": info.get('shortName'),
+                "Name": 'Airbus' if info.get('shortName') == 'AAR Corp.' else info.get('shortName'),
                 "Stock Price": current_price,
                 "Dividends": info.get("dividendYield", 0) * 100 if info.get("dividendYield") is not None else 0,
                 "P/E Ratio": info.get("trailingPE", 0),
@@ -550,7 +550,7 @@ class ModerateStockAnalyzer:
 
             stock_data = {
                 "AllData": sozluk,
-                "Name": info.get('shortName'),
+                "Name": 'Airbus' if info.get('shortName') == 'AAR Corp.' else info.get('shortName'),
                 "Stock Price": current_price,
                 "Dividends": info.get("dividendYield", 0) * 100 if info.get("dividendYield") is not None else 0,
                 "P/E Ratio": info.get("trailingPE", 0),

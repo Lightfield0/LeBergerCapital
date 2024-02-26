@@ -29,8 +29,25 @@
     .app-sidebar-link:hover .sidebar-tooltip {
         transform: scale(1);
     }
-    </style>
-    
+
+    /* Kaydırma çubuğunun kendisi */
+    ::-webkit-scrollbar {
+        width: 12px; /* Yatay kaydırma çubuğu için 'height' kullanabilirsiniz */
+    }
+
+    /* Kaydırma çubuğu yolu */
+    ::-webkit-scrollbar-track {
+        background: #f3f4f6; /* Arka plan rengi */
+    }
+
+    /* Kaydırma çubuğu tutamağı */
+    ::-webkit-scrollbar-thumb {
+        background-color: #4B5563; /* Tutamaç rengi */
+        border-radius: 9999px; /* Yuvarlak kenarlar */
+        border: 3px solid #f3f4f6; /* Tutamaç ve yol arasındaki boşluk */
+    }
+
+</style>
 
 <body>
     <div class="app-container">
