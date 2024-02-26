@@ -92,9 +92,11 @@
                 </div>
               </div>
             </div>
-            <a href="{%url 'signin' %}" class="oe of zg wg ii oi zi hk dark:hover:bg-opacity-90">
-              Sign In / Log In
-            </a>
+            {% if not request.user.is_authenticated %}              
+              <a href="{%url 'signin' %}" class="oe of zg wg ii oi zi hk dark:hover:bg-opacity-90">
+                Sign In / Log In
+              </a>
+            {% endif %}
           </div>
         </div>
       </div>

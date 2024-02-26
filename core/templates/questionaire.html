@@ -242,12 +242,10 @@
             <button class="btn" onclick="previousQuestion()" id="prevBtn">
                 Previous
             </button>
-            <button class="btn" onclick="nextQuestion()" id="nextBtn">next</button>
+            <button class="btn" onclick="nextQuestion()" id="nextBtn">Next</button>
         </div>
     </div>
-    <footer>
-        <p>© 2023 LeBergerCapital. Tous droits réservés.</p>
-    </footer>
+    {% include 'partials/footer.html' %}
 
     <script>
         let currentQuestion = 1;
@@ -263,12 +261,12 @@
         function updateButtons() {
             document.getElementById("prevBtn").disabled = currentQuestion === 1;
             document.getElementById("nextBtn").textContent =
-                currentQuestion === totalQuestions ? "Voir mon profil" : "Suivant";
+                currentQuestion === totalQuestions ? "See my profile" : "Next";
         }
 
         function nextQuestion() {
             if (!isAnswerSelected(currentQuestion)) {
-                alert("Veuillez sélectionner une réponse avant de continuer.");
+                alert("Please select an answer before continuing.");
                 return;
             }
 
@@ -353,7 +351,7 @@
 
         function nextQuestion() {
             if (!isAnswerSelected(currentQuestion)) {
-                alert("Veuillez sélectionner une réponse avant de continuer.");
+                alert("Please select an answer before continuing.");
                 return;
             }
 

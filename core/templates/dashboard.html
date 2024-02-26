@@ -263,14 +263,14 @@
 
         function confirmRedirect() {
             Swal.fire({
-                title: 'Emin misiniz?',
-                text: "Geri dönmek istediğinize emin misiniz?",
+                title: 'Are you sure?',
+                text: "Do you want to go back?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Evet, eminim!',
-                cancelButtonText: 'İptal'
+                confirmButtonText: 'Yes, I am sure!',
+                cancelButtonText: 'Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Django URL yönlendirme

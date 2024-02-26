@@ -2,20 +2,20 @@
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
-    <div class="max-w-lg mx-auto">
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <div class="p-8">
-                <h2 class="text-2xl font-semibold text-gray-800">Hesap Bilgileri</h2>
-                <div class="mt-4">
-                    <div class="text-sm font-semibold text-gray-600">Kullanıcı Adı</div>
-                    <div class="text-lg text-gray-800">{{ request.user.username }}</div>
+    <div class="max-w-md mx-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <div class="p-5">
+            <h2 class="text-2xl font-bold leading-tight text-gray-900 dark:text-white">Hesap Bilgileri</h2>
+            <div class="mt-4 space-y-3">
+                <div>
+                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Kullanıcı Adı</div>
+                    <div class="text-lg text-gray-900 dark:text-white">{{ request.user.username }}</div>
                 </div>
-                <div class="mt-4">
-                    <div class="text-sm font-semibold text-gray-600">Email</div>
-                    <div class="text-lg text-gray-800">{{ request.user.email }}</div>
+                <div>
+                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Email</div>
+                    <div class="text-lg text-gray-900 dark:text-white">{{ request.user.email }}</div>
                 </div>
-                <div class="mt-4">
-                    <a href="{% url 'logout' %}" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors duration-200">Çıkış Yap</a>
+                <div class="flex justify-center">
+                    <a href="{% url 'logout' %}" class="inline-flex items-center justify-center px-4 py-2 text-white bg-red-600 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:ring focus:ring-red-300 disabled:opacity-25 transition ease-in-out duration-150">Çıkış Yap</a>
                 </div>
             </div>
         </div>
