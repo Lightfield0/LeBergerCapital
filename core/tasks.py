@@ -26,7 +26,6 @@ def fetch_and_save_stock_data():
             open_price = hist['Open'].iloc[0]
             percentage_change = ((current_price - open_price) / open_price) * 100
 
-
             # Fetch additional info
             info = stock.info
 
@@ -34,7 +33,6 @@ def fetch_and_save_stock_data():
             stock_data, created = StockData.objects.update_or_create(
                 ticker=ticker,
                 defaults={
-                    'sector': sector,
                     'current_price': current_price,
                     'open_price': open_price,
                     'percentage_change': percentage_change,
@@ -42,6 +40,7 @@ def fetch_and_save_stock_data():
                     # 'info': json.dumps(info) if using TextField
                 }
             )
+
             if created:
                 print(f"Created new record for {ticker}")
             else:

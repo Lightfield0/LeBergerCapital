@@ -46,10 +46,9 @@ class News(models.Model):
 
 
 class StockData(models.Model):
-    ticker = models.CharField(max_length=10)
-    # sector = models.CharField(max_length=50)
+    ticker = models.CharField(max_length=10, unique=True)  # Benzersiz olarak tanımla
     current_price = models.FloatField()
     open_price = models.FloatField()
     percentage_change = models.FloatField()
-    info = models.JSONField(null=True, blank=True)  # For Django 3.1 and newer
+    info = models.JSONField(null=True, blank=True)  # Django 3.1 ve sonrası için
     date_fetched = models.DateTimeField(auto_now_add=True)
