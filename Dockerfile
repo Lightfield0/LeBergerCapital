@@ -1,4 +1,5 @@
 FROM python:3.10
+ENV PYTHONUNBUFFERED 1
 
 # Çalışma dizinini belirle
 WORKDIR /app
