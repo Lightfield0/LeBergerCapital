@@ -80,74 +80,84 @@ button:disabled {
     cursor: not-allowed;
 }
 
-footer {
-    text-align: center;
-    padding: 15px 10px;
-    margin-top: 50px;
-    background: linear-gradient(to top, #003366);
-    color: #ffffff;
-    font-size: 0.9rem;
+
+.confirmation-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    width: 80%;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 40px 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    background-color: #ffffff;
 }
 
-body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: #f5f5f5;
-        }
+span {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 1.1em;
+    margin-top: 15px;
+}
 
-        .confirmation-page {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 70vh;
-            width: 80%;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 40px 30px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 15px;
-            background-color: #ffffff;
-        }
+input[type="text"] {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
 
-        span {
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 1.1em;
-            margin-top: 15px;
-        }
+label {
+    display: block;
+    margin-bottom: 10px;
+}
 
-        input[type="text"] {
-            padding: 10px 15px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            width: 100%;
-            max-width: 400px;
-            margin-bottom: 20px;
-        }
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2d3748;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
+button:hover {
+    background-color: #1a2533;
+}
 
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #2d3748;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
 
-        button:hover {
-            background-color: #1a2533;
-        }
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1rem; /* Smaller text on smaller screens */
+    }
 
-        footer {
-    text-align: center;
-    margin-top: 20px;
-    background-color: #003366;  
-    color: #ffffff;  
-    padding: 10px 0; 
+    .btn-group, .confirmation-page {
+        padding: 20px; /* Less padding on smaller screens */
+    }
 
+    button {
+        margin: 10px 0; /* Stack buttons vertically on smaller screens */
+        width: 100%; /* Full width buttons for easier tapping */
+    }
+
+    label {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 0 10px; /* Add some padding on very small screens */
+    }
+
+    .confirmation-page {
+        margin: 20px auto; /* Less margin on smaller screens */
+    }
+}

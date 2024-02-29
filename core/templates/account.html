@@ -1,21 +1,23 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-8">
-    <div class="max-w-md mx-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+<div class="mx-auto px-4 py-8">
+    <div class="max-w-lg mx-auto rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700" style="background-color: rgb(8,3,33);">
         <div class="p-5">
-            <h2 class="text-2xl font-bold leading-tight text-gray-900 dark:text-white">Hesap Bilgileri</h2>
-            <div class="mt-4 space-y-3">
+            <h2 class="text-2xl font-bold leading-tight text-white">Account Information</h2>
+            <div class="mt-4 space-y-4">
                 <div>
-                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Kullanıcı Adı</div>
-                    <div class="text-lg text-gray-900 dark:text-white">{{ request.user.username }}</div>
+                    <div class="text-sm font-medium text-gray-400">Username</div>
+                    <div class="text-lg text-white">{{ request.user.username }}</div>
                 </div>
                 <div>
-                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Email</div>
-                    <div class="text-lg text-gray-900 dark:text-white">{{ request.user.email }}</div>
+                    <div class="text-sm font-medium text-gray-400">Email</div>
+                    <div class="text-lg text-white">{{ request.user.email }}</div>
                 </div>
-                <div class="flex justify-center">
-                    <a href="{% url 'logout' %}" class="inline-flex items-center justify-center px-4 py-2 text-white bg-red-600 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:ring focus:ring-red-300 disabled:opacity-25 transition ease-in-out duration-150">Çıkış Yap</a>
+                <div class="flex justify-center mt-6">
+                    <a href="{% url 'logout' %}" class="px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 md:py-2 md:text-lg md:px-5 transition ease-in-out duration-150">
+                        Log Out
+                    </a>
                 </div>
             </div>
         </div>

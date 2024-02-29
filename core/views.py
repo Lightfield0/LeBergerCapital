@@ -81,7 +81,7 @@ def sign_in(request):
     return render(request, 'signin.html', {'error_message': error_message})
 
 def account(request):
-    return render(request, 'account.html')
+    return render(request, 'account.html', {'show_navbar': True})
 
 def logout_view(request):
     logout(request)

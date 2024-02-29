@@ -36,7 +36,7 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 SECRET_KEY = 'django-insecure-oxzg!7(3o1ae7tkl_*$b1+68uey(@(a&ss8q%y86&y_pwhj49o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -67,6 +68,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'LeBergerCapital.urls'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 TEMPLATES = [
     {
@@ -149,6 +153,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
+    BASE_DIR / "core"/ "static",
+    BASE_DIR / "question"/ "static",
     BASE_DIR / "static",
 ]
 
