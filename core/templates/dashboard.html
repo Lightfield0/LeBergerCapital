@@ -54,6 +54,7 @@
         <div class="app-content">
             <div class="app-sidebar">
                 <!-- button to return to the home page  -->
+                
                 <a href="{% url 'home' %}" class="app-sidebar-link active relative flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -70,6 +71,12 @@
                         <path d="M9 14L4 9m0 0l5-5m-5 5h11a4 4 0 014 4v7" />
                       </svg>
                 </a>
+                <button class="messages-btn app-sidebar-link" onclick="toggleMessagesSection()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </button>
             </div>
 
             <!-- body stock   -->
@@ -212,7 +219,7 @@
 
 
 
-
+            
             <!-- header messages-section  -->
             <!-- Header kısmı basitleştirilmiş olarak korunuyor -->
             <div class="messages-section">
@@ -252,6 +259,19 @@
 
     <!-- java -->
     <script>
+
+        function toggleMessagesSection() {
+            const messagesSection = document.querySelector('.messages-section');
+            messagesSection.classList.toggle('show');
+        }
+
+        // 'messages-close' butonu için ekleyeceğimiz event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            const closeButton = document.querySelector('.messages-close');
+            closeButton.addEventListener('click', function() {
+                toggleMessagesSection(); // `messages-section`'ın görünürlüğünü değiştir
+            });
+        });
 
         function changeTab(event, tabId) {
             // Hide all tab content
