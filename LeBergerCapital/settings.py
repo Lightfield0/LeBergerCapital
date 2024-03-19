@@ -158,7 +158,8 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = '/app/staticfiles/'
+
 
 # Media dosyalarının URL yolu
 MEDIA_URL = '/media/'
