@@ -1,32 +1,65 @@
 version: '3.8'
 
 services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs:rw
+      - ./vhost.d:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
+    networks:
+      - default
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./certs:/etc/nginx/certs:rw
+      - ./vhost.d:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
+    volumes_from:
+      - nginx-proxy
+    depends_on:
+      - nginx-proxy
+    networks:
+      - default
+
   web:
     build: .
     command: gunicorn LeBergerCapital.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/app
-    ports:
-      - "8000:8000"
+    environment:
+      - VIRTUAL_HOST=lebergercapital.online
+      - LETSENCRYPT_HOST=lebergercapital.online
+      - LETSENCRYPT_EMAIL=ekicizeki265@gmail.com
+      - CELERY_BROKER_URL=redis://redis:6379/0
     depends_on:
       - redis
-    environment:
-      - CELERY_BROKER_URL=redis://redis:6379/0
+    networks:
+      - default
 
   redis:
     image: "redis:alpine"
-    ports:
-      - "6379:6379"
+    networks:
+      - default
 
   celery:
     build: .
     command: celery -A LeBergerCapital worker -l info
     volumes:
       - .:/app
-    depends_on:
-      - redis
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+    networks:
+      - default
 
   celerybeat:
     build: .
@@ -37,3 +70,10 @@ services:
       - redis
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/0
+    networks:
+      - default
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
