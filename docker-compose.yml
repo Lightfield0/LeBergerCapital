@@ -38,6 +38,7 @@ services:
       - VIRTUAL_HOST=lebergercapital.online
       - LETSENCRYPT_HOST=lebergercapital.online
       - LETSENCRYPT_EMAIL=ekicizeki265@gmail.com
+      - VIRTUAL_PORT=8000
       - CELERY_BROKER_URL=redis://redis:6379/0
     depends_on:
       - redis
