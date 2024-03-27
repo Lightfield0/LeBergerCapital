@@ -40,6 +40,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = ['https://lebergercapital.online']
 
 # Application definition
 
@@ -159,6 +160,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = '/app/staticfiles/'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 # Media dosyalarının URL yolu
