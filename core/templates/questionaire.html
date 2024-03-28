@@ -9,6 +9,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" href="{% static 'icons/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'icons/favicon-16x16.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'icons/apple-touch-icon.png' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/questionnaire.css' %}" />
@@ -312,8 +316,8 @@
             let adjustedScore = totalScore / (totalImportance / 100);
 
             sessionStorage.setItem("totalScore", adjustedScore);
-            let profile = categorizeInvestor(adjustedScore);
-            sessionStorage.setItem("investorProfile", profile);
+            // let profile = categorizeInvestor(adjustedScore);
+            // sessionStorage.setItem("investorProfile", profile);
 
 
              // AJAX ile Django'ya POST isteği gönder
@@ -323,7 +327,7 @@
                     "X-CSRFToken": getCookie("csrftoken"), // CSRF token
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ total_score: totalScore, profile: profile }),
+                body: JSON.stringify({ total_score: totalScore, profile: adjustedScore }),
             })
             .then(response => response.json())
             .then(data => {

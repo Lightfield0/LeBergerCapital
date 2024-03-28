@@ -5,6 +5,16 @@ from django.contrib.auth.decorators import login_required
 from .models import SurveyResult
 import json
 
+def categorize_investor(score):
+    print(score)
+    if 7.65 <= score <= 15.68:
+        return "Conservative"
+    elif 15.68 < score <= 23.71:
+        return "Moderate"
+    elif 23.71 < score <= 31.75:
+        return "Aggressive"
+    return "Moderate"
+
 @csrf_exempt
 def survey_result_view(request):
     if request.method == "POST":
@@ -13,6 +23,8 @@ def survey_result_view(request):
         total_score = data.get('total_score')
         profile = data.get('profile')
 
+        profile = categorize_investor(profile)
+        
         # Kullanıcının anket sonucunu kaydet
         SurveyResult.objects.update_or_create(
             user=request.user,
